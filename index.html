@@ -69,6 +69,7 @@
 
     button:hover {
       background-color: #45a049;
+      color: white
     }
 
     /* Additional styles for radio buttons */
@@ -97,16 +98,16 @@
     <br />
     <div id="inputsGroups">
       <div id="inputGroup1">
-        <div class="input-group">
-          <label for="teamCode">Team code</label>
-          <input type="number" id="teamCode" name="teamCode" value="111">
+        <div>
+          <div class="input-group">
+            <label for="teamCode">Team code</label>
+            <input type="number" id="teamCode" name="teamCode" value="111">
+          </div>
+          <div class="input-group">
+            <label for="plantCode">Plant code</label>
+            <input type="number" id="plantCode" name="plantCode" value="1116">
+          </div>
         </div>
-
-        <div class="input-group">
-          <label for="plantCode">Plant code</label>
-          <input type="number" id="plantCode" name="plantCode" value="1116">
-        </div>
-
         <div class="input-group">
           <label for="speciesName">Species name</label>
           <select id="speciesName" name="speciesName">
@@ -117,12 +118,12 @@
 
         <div class="input-group">
           <label for="gbh">GBH</label>
-          <input type="number" id="gbh" name="gbh" min="1" max="5" value="3">
+          <input type="number" id="gbh" name="gbh" min="10" max="50" value="30">
         </div>
       </div>
       <div class="">
         <button class="btn1" type="button" onclick="addInputGroup()">Add animal</button>
-        <button class="btn1" type="button" onclick="removeInputGroup()">Remove last animal</button>
+        <button class="btn1" id="removeBtn" type="button" onclick="removeInputGroup()">Remove last animal</button>
       </div>
 
       <div id="inputGroup2">
@@ -164,11 +165,17 @@
   </form>
 
   <script>
+    function hasNoAnimal() {
+      var inputGroup2List = document.querySelectorAll('#inputGroup2');
+      return inputGroup2List.length == 1 && inputGroup2List[0].style.opacity == 0.3
+
+    }
     function addInputGroup() {
       console.log('adding')
-      var inputGroup2List = document.querySelectorAll('#inputGroup2');
-      if (inputGroup2List.length == 1 && inputGroup2List[0].style.opacity == 0.3) {
+      if (hasNoAnimal()) {
+        var inputGroup2List = document.querySelectorAll('#inputGroup2');
         inputGroup2List[0].style.opacity = 1
+        document.querySelector('#removeBtn').style.opacity = 1
       } else {
         var clone = document.getElementById('inputGroup2').cloneNode(true);
         document.getElementById('inputsGroups').appendChild(clone);
@@ -188,85 +195,95 @@
       } else if (inputGroup2List.length == 1) {
         var element = inputGroup2List[inputGroup2List.length - 1];
         element.style.opacity = 0.3
+        document.querySelector('#removeBtn').style.opacity = 0.3
+
         //element.parentNode.removeChild(element);
       }
     }
 
     function submitForm() {
-      console.log('hi')
-      var url1 = 'https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url';
-      var url2 = 'https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url';
+      try {
+        console.log('hi')
+        var url1 = 'https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url';
+        var url2 = 'https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url';
 
-      var formData1 = {
-        'teamCode': document.getElementById('teamCode').value,
-        'plantCode': document.getElementById('plantCode').value,
-        'speciesName': document.getElementById('speciesName').value,
-        'gbh': document.getElementById('gbh').value
-      };
+        var formData1 = {
+          'teamCode': document.getElementById('teamCode').value,
+          'plantCode': document.getElementById('plantCode').value,
+          'speciesName': document.getElementById('speciesName').value,
+          'gbh': document.getElementById('gbh').value
+        };
 
-      var inputGroup2Elements = document.querySelectorAll('#inputGroup2');
-      var formData2Array = [];
+        var inputGroup2Elements = document.querySelectorAll('#inputGroup2');
+        var formData2Array = [];
 
-      inputGroup2Elements.forEach(function (group) {
-        var associatedPlantCode = // group.querySelector('[name="associatedPlantCode"]').value;
-          formData1.plantCode
-        var animalSpecies = group.querySelector('[name="animalSpecies"]').value;
-        var animalCount = group.querySelector('[name="animalCount"]').value;
-        var interactionType = group.querySelector('[name="interactionType"]').value;
+        inputGroup2Elements.forEach(function (group) {
+          var associatedPlantCode = // group.querySelector('[name="associatedPlantCode"]').value;
+            formData1.plantCode
+          var animalSpecies = group.querySelector('[name="animalSpecies"]').value;
+          var animalCount = group.querySelector('[name="animalCount"]').value;
+          var interactionType = group.querySelector('[name="interactionType"]').value;
 
-        formData2Array.push({
-          'associatedPlantCode': associatedPlantCode,
-          'animalSpecies': animalSpecies,
-          'animalCount': animalCount,
-          'interactionType': interactionType
+          formData2Array.push({
+            'associatedPlantCode': associatedPlantCode,
+            'animalSpecies': animalSpecies,
+            'animalCount': animalCount,
+            'interactionType': interactionType
+          });
         });
-      });
 
-      getFullURL1 = (url, data) => {
-        {
-          // "teamCode": "111",
-          // "plantCode": "1116",
-          // "speciesName": "Neem",
-          // "gbh": "3"
+        getFullURL1 = (url, data) => {
+          {
+            // "teamCode": "111",
+            // "plantCode": "1116",
+            // "speciesName": "Neem",
+            // "gbh": "3"
+          }
+          return `${url}&entry.1731982848=${data.teamCode}&entry.1336780329=${data.plantCode}&entry.1634616229=${data.speciesName}&entry.965392427=${data.gbh}`;
+          // var url1 = 'https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url';
+
+          // https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url&entry.1731982848=1111&entry.1336780329=1115&entry.1634616229=Neem&entry.965392427=2
         }
-        return `${url}&entry.1731982848=${data.teamCode}&entry.1336780329=${data.plantCode}&entry.1634616229=${data.speciesName}&entry.965392427=${data.gbh}`;
-        // var url1 = 'https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url';
 
-        // https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url&entry.1731982848=1111&entry.1336780329=1115&entry.1634616229=Neem&entry.965392427=2
-      }
+        getFullURL2 = (url, data) => {
+          //         {
+          //   "associatedPlantCode": "1116",
+          //   "animalSpecies": "Roller",
+          //   "animalCount": "4",
+          //   "interactionType": "Feeding"
+          // }
+          return `${url}&entry.649217680=${data.associatedPlantCode}&entry.267793795=${data.animalSpecies}&entry.342920962=${data.animalCount}&entry.1901368330=${data.interactionType || "Feeding"}`
+          // var url2 = 'https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url';
 
-      getFullURL2 = (url, data) => {
-        //         {
-        //   "associatedPlantCode": "1116",
-        //   "animalSpecies": "Roller",
-        //   "animalCount": "4",
-        //   "interactionType": "Feeding"
-        // }
-        return `${url}&entry.649217680=${data.associatedPlantCode}&entry.267793795=${data.animalSpecies}&entry.342920962=${data.animalCount}&entry.1901368330=${data.interactionType || "Feeding"}`
-        // var url2 = 'https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url';
-
-        // https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url&entry.649217680=1115&entry.267793795=Dragonfly&entry.342920962=2&entry.1901368330=Feeding
-      }
-
-
-      // Assuming you are using the Fetch API for simplicity
-      fetch(getFullURL1(url1, formData1), {
-        method: 'POST',
-        body: new URLSearchParams(formData1),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          // https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url&entry.649217680=1115&entry.267793795=Dragonfly&entry.342920962=2&entry.1901368330=Feeding
         }
-      });
 
-      formData2Array.forEach(function (data) {
-        fetch(getFullURL2(url2, data), {
+
+        // Assuming you are using the Fetch API for simplicity
+        fetch(getFullURL1(url1, formData1), {
           method: 'POST',
-          body: new URLSearchParams(data),
+          body: new URLSearchParams(formData1),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         });
-      });
+
+        if (!hasNoAnimal()) {
+          formData2Array.forEach(function (data) {
+            fetch(getFullURL2(url2, data), {
+              method: 'POST',
+              body: new URLSearchParams(data),
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            });
+          });
+        }
+        alert("Data submitted.")
+      }
+      catch (err) {
+        alert(err.message)
+      }
     }
   </script>
 
