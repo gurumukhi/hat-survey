@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hyderabad Tree Survey</title>
   <style>
+    .smallInput {
+      width: 60px !important;
+    }
+
+    .largeInput {
+      width: 200px !important;
+    }
+
     body {
       font-family: 'Arial', sans-serif;
       background-color: #f4f4f4;
@@ -43,8 +51,8 @@
     }
 
     input[type="checkbox"] {
-      /* width: auto; */
-      margin: 10px 10px 0px 0px;
+      width: auto;
+      margin: 10px 10px 0px 5px;
     }
 
     input[type="number"],
@@ -106,17 +114,17 @@
       <div id="inputGroup1">
         <div>
           <div class="input-group">
-            <label for="teamCode">Team code</label>
+            <label for="teamCode">Team Code</label>
             <input type="number" id="teamCode" name="teamCode" value="111">
           </div>
           <div class="input-group">
-            <label for="plantCode">Plant code</label>
+            <label for="plantCode">Plant Code</label>
             <input type="number" id="plantCode" name="plantCode" value="1116">
           </div>
         </div>
         <div>
           <div class="input-group">
-            <label for="speciesName">Species name</label>
+            <label for="speciesName">Species Name</label>
             <select id="speciesName" name="speciesName">
               <option value="Neem" selected>Neem</option>
               <option value="Amla">Amla</option>
@@ -130,17 +138,17 @@
           </div>
 
           <div class="input-group">
-            <label for="gbh">GBH</label>
-            <input type="number" id="gbh" name="gbh" min="10" max="50" value="30">
-          </div>
-
-          <div class="input-group">
             <label for="treeRemark">Remark</label>
-            <input id="treeRemark" name="treeRemark" type="text" style="width: 100px !important;">
+            <input id="treeRemark" name="treeRemark" class="largeInput" type="text">
           </div>
 
         </div>
         <div>
+          <div class="input-group">
+            <label for="gbh">GBH</label>
+            <input class="smallInput" type="number" id="gbh" name="gbh" min="10" max="50" value="30">
+          </div>
+
           <div class="input-group">
             <label for="speciesName">Leaves</label>
             <select id="speciesName" name="speciesName">
@@ -159,11 +167,13 @@
           </div>
           <div class="input-group">
             <label for="treeRemark">Flowering?</label>
-            <input id="treeRemark" name="treeRemark" type="checkbox">
+            <div style="width:auto"><input id="treeRemark" name="treeRemark" type="checkbox"></div>
           </div>
           <div class="input-group">
             <label for="treeRemark">Fruiting?</label>
-            <input id="treeRemark" name="treeRemark" type="checkbox" style="width: 100px !important;">
+
+            <div style="width:auto"><input id="treeRemark" name="treeRemark" type="checkbox"></div>
+
           </div>
 
 
@@ -203,8 +213,8 @@
         </div> -->
 
         <div class="input-group">
-          <label for="animalCount">Animal count</label>
-          <input type="number" id="animalCount" name="animalCount" value="4">
+          <label for="animalCount">Count</label>
+          <input type="number" class="smallInput" id="animalCount" name="animalCount" value="4">
         </div>
 
         <div class="input-group">
@@ -221,7 +231,7 @@
 
         <div class="input-group">
           <label for="treeRemark">Remark</label>
-          <input id="treeRemark" name="treeRemark" type="text" style="width: 100px !important;">
+          <input id="treeRemark" class="largeInput" name="treeRemark" type="text">
         </div>
 
       </div>
