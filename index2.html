@@ -120,13 +120,13 @@
             <input type="number" id="teamCode" name="teamCode" value="">
           </div>
           <div class="input-group">
-            <label for="plantCode">Plant Code</label>
+            <label for="plantCode">Tree Code</label>
             <input type="number" id="plantCode" name="plantCode" value="">
           </div>
         </div>
         <div>
           <div class="input-group">
-            <label for="speciesName"><b>Plant Species Name</b></label>
+            <label for="speciesName"><b>Tree Species Name</b></label>
             <select id="speciesName" name="speciesName" class="largeInput">
 
             </select>
@@ -134,7 +134,7 @@
 
           <div class="input-group">
             <label for="inatMetaId">iNaturalist #</label>
-            <input id="inatMetaId" type="number" name="inatMetaId" placeholder="123456789" value="">
+            <input id="plantInatMetaId" type="number" name="platInatMetaId" placeholder="123456789" value="">
           </div>
 
           <div class="input-group">
@@ -150,30 +150,30 @@
           </div>
 
           <div class="input-group">
-            <label for="speciesName">Leaves</label>
-            <select id="speciesName" name="speciesName">
+            <label for="treeLeaves">Leaves</label>
+            <select id="treeLeaves" name="treeLeaves">
               <option value="Absent" selected>Absent</option>
               <option value="Few">Few (< 50%)</option>
               <option value="Many">Many (> 50%)</option>
+              <option value="">Unsure</option>
             </select>
           </div>
           <div class="input-group">
-            <label for="speciesName">Canopy</label>
-            <select id="speciesName" name="speciesName">
+            <label for="treeCanopy">Canopy</label>
+            <select id="treeCanopy" name="treeCanopy">
               <option value="Open" selected>Open</option>
               <option value="Partially Open">Partially Open (< 50%)</option>
               <option value="Close">Close (> 50%)</option>
+              <option value="">Unsure</option>
             </select>
           </div>
           <div class="input-group">
-            <label for="treeRemark">Flowering?</label>
-            <div style="width:auto"><input id="treeRemark" name="treeRemark" type="checkbox"></div>
+            <label for="treeFlowering">Flowering?</label>
+            <div style="width:auto"><input id="treeFlowering" name="treeFlowering" type="checkbox"></div>
           </div>
           <div class="input-group">
-            <label for="treeRemark">Fruiting?</label>
-
-            <div style="width:auto"><input id="treeRemark" name="treeRemark" type="checkbox"></div>
-
+            <label for="treeFruiting">Fruiting?</label>
+            <div style="width:auto"><input id="treeFruiting" name="treeFruiting" type="checkbox"></div>
           </div>
 
 
@@ -192,12 +192,12 @@
 
           <div class="input-group">
             <label for="inatMetaId">iNaturalist #</label>
-            <input id="inatMetaId" type="number" name="inatMetaId" placeholder="123456789" value="">
+            <input id="animalInatMetaId" type="number" name="animalInatMetaId" placeholder="123456789" value="">
           </div>
 
           <div class="input-group">
-            <label for="treeRemark">Remark</label>
-            <input id="treeRemark" class="largeInput" name="treeRemark" type="text">
+            <label for="animalRemark">Remark</label>
+            <input id="animalRemark" class="largeInput" name="animalRemark" type="text">
           </div>
         </div>
         <div class="input-group">
@@ -208,6 +208,7 @@
         <div class="input-group">
           <label>Activity</label>
           <select id="interactionType" name="interactionType">
+            <option value="None">None/Unsure</option>
             <option value="Feeding">Flying/Moving</option>
             <option value="Nesting" selected>Resting</option>
             <option value="Nesting" selected>Mating</option>
@@ -234,7 +235,7 @@
     <br />
     <br />
     <div>
-      <h2> Help resources</h2>
+      <h2> Help Resources</h2>
       <ul>
         <li><a
             href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtU7yER88_Ltp_a1pEDedDzYWY6PguA_pNSqUNC9m-XH69sp60ElroW8Xf4mKMY5MGMbDqOoc79taU/pubhtml?gid=2080266743&single=true">Tree
@@ -290,29 +291,33 @@
         console.log('hi')
         var url1 = 'https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url';
         var url2 = 'https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url';
-
+        var url3 = 'https://docs.google.com/forms/d/e/1FAIpQLSduzoPUnh1-VlaGDAXs4Q4oMSxQT06Es3vq-ik6XqhYXzzRZQ/formResponse?&submit=Submit?usp=pp_url';
+        ////
+        console.log('data1')
         var formData1 = {
           'teamCode': document.getElementById('teamCode').value,
           'plantCode': document.getElementById('plantCode').value,
           'speciesName': document.getElementById('speciesName').value,
-          'gbh': document.getElementById('gbh').value
+          'plantInatMetaId': document.getElementById('plantInatMetaId').value,
+          'treeRemark': document.getElementById('treeRemark').value,
+          'gbh': document.getElementById('gbh').value,
+          'treeLeaves': document.getElementById('treeLeaves').value,
+          'treeCanopy': document.getElementById('treeCanopy').value,
+          'treeFlowering': document.getElementById('treeFlowering').checked,
+          'treeFruiting': document.getElementById('treeFruiting').checked,
         };
 
         var inputGroup2Elements = document.querySelectorAll('#inputGroup2');
         var formData2Array = [];
 
         inputGroup2Elements.forEach(function (group) {
-          var associatedPlantCode = // group.querySelector('[name="associatedPlantCode"]').value;
-            formData1.plantCode
-          var animalSpecies = group.querySelector('[name="animalSpecies"]').value;
-          var animalCount = group.querySelector('[name="animalCount"]').value;
-          var interactionType = group.querySelector('[name="interactionType"]').value;
-
           formData2Array.push({
-            'associatedPlantCode': associatedPlantCode,
-            'animalSpecies': animalSpecies,
-            'animalCount': animalCount,
-            'interactionType': interactionType
+            // 'associatedPlantCode': formData1.plantCode,
+            'animalSpecies': group.querySelector('[name="animalSpecies"]').value,
+            'animalCount': group.querySelector('[name="animalCount"]').value,
+            'interactionType': group.querySelector('[name="interactionType"]').value,
+            'animalInatMetaId': group.querySelector('[name=animalInatMetaId]').value,
+            'animalRemark': group.querySelector('[name=animalRemark]').value,
           });
         });
 
@@ -342,21 +347,68 @@
           // https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url&entry.649217680=1115&entry.267793795=Dragonfly&entry.342920962=2&entry.1901368330=Feeding
         }
 
+        getFullURL3 = (url, data) => {
+          // return `${url}&entry.1731982848=${data.teamCode}&entry.1336780329=${data.plantCode}&entry.1634616229=${data.speciesName}&entry.965392427=${data.gbh}`;
+          // return `${url}&entry.649217680=${data.associatedPlantCode}&entry.267793795=${data.animalSpecies}&entry.342920962=${data.animalCount}&entry.1901368330=${data.interactionType || "Feeding"}`
+
+          // teamCode
+          // plantCode
+          // speciesName
+          // plantInatMetaId
+          // treeRemark
+          // gbh
+          // treeLeaves
+          // treeCanopy
+          // treeFlowering
+          // treeFruiting
+          // animalSpecies
+          // animalCount
+          // interactionType
+          // animalInatMetaId
+          // animalRemark
+
+          // var url3Suffix = '&entry.1664808834=teamcode&entry.1981805346=treecode&entry.798862294=treespeciesname&entry.724347484=treeinatid&entry.1957343692=treeremarks&entry.1423009416=treegbh&entry.218206116=treeleaves&entry.1767881883=treecanopy&entry.1792652260=treeflowering&entry.1156221592=treefruiting&entry.1342359126=animalname&entry.1739765474=animalinatid&entry.1976377500=animalremarks&entry.1717792239=animalcount&entry.1852332458=animalactivity '
+          var url3Suffix = `&entry.1664808834=${data.teamCode}&entry.1981805346=${data.plantCode}&entry.798862294=${data.speciesName}&entry.724347484=${data.plantInatMetaId}&entry.1957343692=${data.treeRemark}&entry.1423009416=${data.gbh}&entry.218206116=${data.treeLeaves}&entry.1767881883=${data.treeCanopy}&entry.1792652260=${data.treeFlowering}&entry.1156221592=${data.treeFruiting}&entry.1342359126=${data.animalSpecies || ""}&entry.1739765474=${data.animalInatMetaId || ""}&entry.1976377500=${data.animalRemark || ""}&entry.1717792239=${data.animalCount || ""}&entry.1852332458=${data.interactionType || ""} `;
+
+          return `${url}${url3Suffix}`;////////
+        }
+
+        // // Assuming you are using the Fetch API for simplicity
+        // fetch(getFullURL1(url1, formData1), {
+        //   method: 'POST',
+        //   body: new URLSearchParams(formData1),
+        //   headers: {
+        //     'Content-Type': 'application/x-www-form-urlencoded'
+        //   }
+        // });
+
+        // if (!hasNoAnimal()) {
+        //   formData2Array.forEach(function (data) {
+        //     fetch(getFullURL2(url2, data), {
+        //       method: 'POST',
+        //       body: new URLSearchParams(data),
+        //       headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded'
+        //       }
+        //     });
+        //   });
+        // }
 
         // Assuming you are using the Fetch API for simplicity
-        fetch(getFullURL1(url1, formData1), {
-          method: 'POST',
-          body: new URLSearchParams(formData1),
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        });
-
-        if (!hasNoAnimal()) {
+        if (hasNoAnimal()) {
+          fetch(getFullURL3(url3, formData1), {
+            method: 'POST',
+            // body: new URLSearchParams(formData1),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          });
+        }
+        else {
           formData2Array.forEach(function (data) {
-            fetch(getFullURL2(url2, data), {
+            fetch(getFullURL3(url3, { ...formData1, ...data }), {
               method: 'POST',
-              body: new URLSearchParams(data),
+              // body: new URLSearchParams(data),
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
               }
@@ -381,6 +433,7 @@
       //   .then(csvData => {
       // Parse CSV to JSON using Papaparse
       csvData = `Sr No;ScientificName;Common name;Hindi name;Telugu name;Additional information
+0;Unidentified;Unidentified;Unidentified;Unidentified;Unidentified
 1;Acacia nilotica;Babul;Babul;Nalla Tumma;Sensitive to touch
 2;Ficus benghalensis;Banyan;Bargad;Marri;Large
 3;Mangifera indica;Mango;Aam;Mamidi;Produces delicious
