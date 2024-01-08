@@ -380,18 +380,40 @@
       //   .then(response => response.text())
       //   .then(csvData => {
       // Parse CSV to JSON using Papaparse
-      csvData = `Sr No,ScientificName,Common name,Hindi name,Telugu name,Additional information
-1,Acacia nilotica,Babul,Babul,Nalla Tumma,Sensitive to touch
-2,Ficus benghalensis,Banyan,Bargad,Marri,Large
-3,Mangifera indica,Mango,Aam,Mamidi,Produces delicious
-4,Azadirachta indica,Neem,Neem,Vepa,Medicinal tree with bitter leaves and useful in various remedies.
-5,Delonix regia,Royal Poinciana,Gulmohar,Gulmamdaramu,Known for its vibrant red-orange flowers.
-6,Terminalia arjuna,Arjun Tree,Arjun,Terupalli,Used in traditional medicine
-7,Eucalyptus globulus,Blue Gum,Blue Gum,Nilagirigitta,Commonly used for timber and paper production.
-8,Peltophorum pterocarpum,Copperpod,Pila Kaner,Regu Regutu,Attractive yellow flowers
-9,Bauhinia variegata,Purple Orchid Tree,Kachnar,Manjuvu,Named for its distinctive butterfly-shaped leaves.
-10,Cocos nucifera,Coconut Palm,Nariyal,Kobbari Chettu,Provides a variety of products`;
-      const jsonData = Papa.parse(csvData, { header: true }).data;
+      csvData = `Sr No;ScientificName;Common name;Hindi name;Telugu name;Additional information
+1;Acacia nilotica;Babul;Babul;Nalla Tumma;Sensitive to touch
+2;Ficus benghalensis;Banyan;Bargad;Marri;Large
+3;Mangifera indica;Mango;Aam;Mamidi;Produces delicious
+4;Azadirachta indica;Neem;Neem;Vepa;Medicinal tree with bitter leaves and useful in various remedies.
+5;Delonix regia;Royal Poinciana;Gulmohar;Gulmamdaramu;Known for its vibrant red-orange flowers.
+6;Terminalia arjuna;Arjun Tree;Arjun;Terupalli;Used in traditional medicine
+7;Eucalyptus globulus;Blue Gum;Blue Gum;Nilagirigitta;Commonly used for timber and paper production.
+8;Peltophorum pterocarpum;Copperpod;Pila Kaner;Regu Regutu;Attractive yellow flowers
+9;Bauhinia variegata;Purple Orchid Tree;Kachnar;Manjuvu;Named for its distinctive butterfly-shaped leaves.
+10;Cocos nucifera;Coconut Palm;Nariyal;Kobbari Chettu;Provides a variety of products`;
+      // const jsonData = Papa.parse(csvData, { header: true }).data;
+      function parseCSV(csvData) {
+        const lines = csvData.split('\n');
+        const headers = lines[0].split(';');
+        const jsonDataList = [];
+        console.log('parsing')
+        for (let i = 1; i < lines.length; i++) {
+          const currentLine = lines[i].split(';');
+          const row = {};
+
+          for (let j = 0; j < headers.length; j++) {
+            row[headers[j]] = currentLine[j];
+          }
+
+          jsonDataList.push(row);
+        }
+        console.log(jsonDataList)
+        return jsonDataList;
+      }
+
+
+      const jsonData = parseCSV(csvData, { header: true });
+      console.log(jsonData)
 
       const treeNames = jsonData.map(row => row['ScientificName']); // Replace 'TreeName' with the actual column header
 
