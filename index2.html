@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
   <title>Hyderabad Tree Survey</title>
   <style>
     .smallInput {
@@ -47,7 +49,7 @@
     label {
       display: block;
       margin-bottom: 5px;
-      font-weight: bold;
+      /* font-weight: bold; */
     }
 
     input[type="checkbox"] {
@@ -82,8 +84,8 @@
     }
 
     button:hover {
-      background-color: #45a049;
-      color: white
+      /* background-color: #45a049;
+      color: white */
     }
 
     /* Additional styles for radio buttons */
@@ -108,32 +110,30 @@
 <body style="background: rgba(11, 156, 49,0.7) ">
 
   <form id="dataForm">
-    <h1 style="text-align: center;">Hyderabad Avenue Tree Survey Form</h1>
+    <h1 style="text-align: center;">Hyderabad Annual Tree Survey Form</h1>
     <br />
     <div id="inputsGroups">
       <div id="inputGroup1">
         <div>
           <div class="input-group">
             <label for="teamCode">Team Code</label>
-            <input type="number" id="teamCode" name="teamCode" value="111">
+            <input type="number" id="teamCode" name="teamCode" value="">
           </div>
           <div class="input-group">
             <label for="plantCode">Plant Code</label>
-            <input type="number" id="plantCode" name="plantCode" value="1116">
+            <input type="number" id="plantCode" name="plantCode" value="">
           </div>
         </div>
         <div>
           <div class="input-group">
-            <label for="speciesName">Species Name</label>
-            <select id="speciesName" name="speciesName">
-              <option value="Neem" selected>Neem</option>
-              <option value="Amla">Amla</option>
-              <option value="Other">Other/Unidentified</option>
+            <label for="speciesName"><b>Plant Species Name</b></label>
+            <select id="speciesName" name="speciesName" class="largeInput">
+
             </select>
           </div>
 
           <div class="input-group">
-            <label for="inatMetaId">iNat MetaID</label>
+            <label for="inatMetaId">iNaturalist #</label>
             <input id="inatMetaId" type="number" name="inatMetaId" placeholder="123456789" value="">
           </div>
 
@@ -146,7 +146,7 @@
         <div>
           <div class="input-group">
             <label for="gbh">GBH</label>
-            <input class="smallInput" type="number" id="gbh" name="gbh" min="10" max="50" value="30">
+            <input class="smallInput" type="number" id="gbh" name="gbh" min="10" max="50" value="">
           </div>
 
           <div class="input-group">
@@ -180,41 +180,29 @@
 
         </div>
       </div>
-      <div class="">
-        <button class="btn1" type="button" onclick="addInputGroup()">Add animal</button>
-        <button class="btn1" id="removeBtn" type="button" onclick="removeInputGroup()">Remove last animal</button>
-      </div>
 
-      <div id="inputGroup2">
-        <!-- <div class="input-group">
-        <label for="associatedPlantCode">Associated Plant code</label>
-        <input type="number" id="associatedPlantCode" name="associatedPlantCode" value="1116">
-      </div> -->
+      <div id="inputGroup2" style="display: none;">
+        <div>
+          <div class="input-group">
+            <label for="animalSpecies"><b>Animal Name</b></label>
+            <input id="animalSpecies" class="largeInput" name="animalSpecies" type="text">
 
-        <div class="input-group">
-          <label for="animalSpecies">Animal species</label>
-          <select id="animalSpecies" name="animalSpecies">
-            <option value="Parakeet">Parakeet</option>
-            <option value="Roller" selected>Roller</option>
-            <option value="CommonCrow">Common crow</option>
-            <option value="Other">Other / Unidentified</option>
-          </select>
+          </div>
+
+
+          <div class="input-group">
+            <label for="inatMetaId">iNaturalist #</label>
+            <input id="inatMetaId" type="number" name="inatMetaId" placeholder="123456789" value="">
+          </div>
+
+          <div class="input-group">
+            <label for="treeRemark">Remark</label>
+            <input id="treeRemark" class="largeInput" name="treeRemark" type="text">
+          </div>
         </div>
-
-
-        <div class="input-group">
-          <label for="inatMetaId">iNat MetaID</label>
-          <input id="inatMetaId" type="number" name="inatMetaId" placeholder="123456789" value="">
-        </div>
-
-        <!-- <div class="input-group">
-          <label for="gbh">GBH</label>
-          <input type="number" id="gbh" name="gbh" min="10" max="50" value="30">
-        </div> -->
-
         <div class="input-group">
           <label for="animalCount">Count</label>
-          <input type="number" class="smallInput" id="animalCount" name="animalCount" value="4">
+          <input type="number" class="smallInput" id="animalCount" name="animalCount" value="">
         </div>
 
         <div class="input-group">
@@ -228,19 +216,34 @@
           <!-- <label><input type="radio" name="interactionType" value="Feeding" checked>Feeding</label>
         <label><input type="radio" name="interactionType" value="Nesting">Nesting</label> -->
         </div>
-
-        <div class="input-group">
-          <label for="treeRemark">Remark</label>
-          <input id="treeRemark" class="largeInput" name="treeRemark" type="text">
-        </div>
-
       </div>
+
     </div>
+    <div class="">
+      <button class="btn1" type="button" onclick="addInputGroup()">Add Animal</button>
+      <button class="btn1" id="removeBtn" type="button" style="opacity: 0.3;" onclick="removeInputGroup()">Remove
+        Animal</button>
+    </div>
+
     <div id="action">
       <button type="button" onclick="submitForm()">Submit</button>
       <a style="float:right; color:green; margin: 20px"
         href="https://docs.google.com/spreadsheets/d/1dQo9GGlV8opg-7pLxV3Y9c_GFzEAYu-Xxfd6TYb9l9o/" target="_blank">See
         submissions</a>
+    </div>
+    <br />
+    <br />
+    <div>
+      <h2> Help resources</h2>
+      <ul>
+        <li><a
+            href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtU7yER88_Ltp_a1pEDedDzYWY6PguA_pNSqUNC9m-XH69sp60ElroW8Xf4mKMY5MGMbDqOoc79taU/pubhtml?gid=2080266743&single=true">Tree
+            Species Names</a></li>
+        <li><a href="https://www.seasonwatch.in/wp-content/uploads/2023/11/SW-phenophases-guide-compressed.pdf">Tree
+            Phenophases Detailed Guide PDF
+          </a></li>
+
+      </ul>
     </div>
 
   </form>
@@ -248,14 +251,16 @@
   <script>
     function hasNoAnimal() {
       var inputGroup2List = document.querySelectorAll('#inputGroup2');
-      return inputGroup2List.length == 1 && inputGroup2List[0].style.opacity == 0.3
+      return inputGroup2List.length == 1 && inputGroup2List[0].style.display == "none"
 
     }
     function addInputGroup() {
       console.log('adding')
       if (hasNoAnimal()) {
         var inputGroup2List = document.querySelectorAll('#inputGroup2');
-        inputGroup2List[0].style.opacity = 1
+        // inputGroup2List[0].style.opacity = 1
+        inputGroup2List[0].style.display = "block"
+        console.log(inputGroup2List[0])
         document.querySelector('#removeBtn').style.opacity = 1
       } else {
         var clone = document.getElementById('inputGroup2').cloneNode(true);
@@ -265,18 +270,16 @@
 
     function removeInputGroup() {
       console.log('removing')
-      // var inputGroup2 = document.getElementById('inputGroup2');
-      // if (inputGroup2.childElementCount > 1) {
-      //   inputGroup2.removeChild(inputGroup2.lastElementChild);
-      // }
       var inputGroup2List = document.querySelectorAll('#inputGroup2');
       if (inputGroup2List.length > 1) {
         var element = inputGroup2List[inputGroup2List.length - 1];
         element.parentNode.removeChild(element);
       } else if (inputGroup2List.length == 1) {
         var element = inputGroup2List[inputGroup2List.length - 1];
-        element.style.opacity = 0.3
+        // element.style.opacity = 0.3
+        element.style.display = "none"
         document.querySelector('#removeBtn').style.opacity = 0.3
+
 
         //element.parentNode.removeChild(element);
       }
@@ -368,6 +371,48 @@
     }
   </script>
 
+
+  <script>
+    const csvFileName = 'trees.csv';
+
+    function loadTreeData() {
+      // fetch(csvFileName)
+      //   .then(response => response.text())
+      //   .then(csvData => {
+      // Parse CSV to JSON using Papaparse
+      csvData = `Sr No,ScientificName,Common name,Hindi name,Telugu name,Additional information
+1,Acacia nilotica,Babul,Babul,Nalla Tumma,Sensitive to touch
+2,Ficus benghalensis,Banyan,Bargad,Marri,Large
+3,Mangifera indica,Mango,Aam,Mamidi,Produces delicious
+4,Azadirachta indica,Neem,Neem,Vepa,Medicinal tree with bitter leaves and useful in various remedies.
+5,Delonix regia,Royal Poinciana,Gulmohar,Gulmamdaramu,Known for its vibrant red-orange flowers.
+6,Terminalia arjuna,Arjun Tree,Arjun,Terupalli,Used in traditional medicine
+7,Eucalyptus globulus,Blue Gum,Blue Gum,Nilagirigitta,Commonly used for timber and paper production.
+8,Peltophorum pterocarpum,Copperpod,Pila Kaner,Regu Regutu,Attractive yellow flowers
+9,Bauhinia variegata,Purple Orchid Tree,Kachnar,Manjuvu,Named for its distinctive butterfly-shaped leaves.
+10,Cocos nucifera,Coconut Palm,Nariyal,Kobbari Chettu,Provides a variety of products`;
+      const jsonData = Papa.parse(csvData, { header: true }).data;
+
+      const treeNames = jsonData.map(row => row['ScientificName']); // Replace 'TreeName' with the actual column header
+
+      const dropdown = document.getElementById('speciesName');
+
+      // Populate the dropdown
+      treeNames.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.text = name;
+        dropdown.appendChild(option);
+      });
+      // })
+      // .catch(error => {
+      //   console.error('Error fetching or parsing CSV data: ', error);
+      // });
+    }
+
+    // Load tree data when the page is loaded
+    window.onload = loadTreeData;
+  </script>
 </body>
 
 </html>
