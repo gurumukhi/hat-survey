@@ -8,6 +8,10 @@
 
   <title>Hyderabad Tree Survey</title>
   <style>
+    li {
+      margin: 5px
+    }
+
     .smallInput {
       width: 60px !important;
     }
@@ -83,10 +87,10 @@
       margin-top: 10px;
     }
 
-    button:hover {
-      /* background-color: #45a049;
-      color: white */
-    }
+    /* button:hover {
+       background-color: #45a049;
+      color: white 
+    } */
 
     /* Additional styles for radio buttons */
     input[type="radio"] {
@@ -110,11 +114,13 @@
 <body style="background: rgba(11, 156, 49,0.7) ">
 
   <form id="dataForm">
-    <h1 style="text-align: center;">Hyderabad Annual Tree Survey Form</h1>
+    <h1 style="text-align: center;">Hyderabad Annual Tree Survey</h1>
     <br />
     <div id="inputsGroups">
       <div id="inputGroup1">
-        <div>
+        <div style="
+        /* text-align: center;  */
+        margin-bottom: 20px;">
           <div class="input-group">
             <label for="teamCode">Team Code</label>
             <input type="number" id="teamCode" name="teamCode" value="">
@@ -124,60 +130,60 @@
             <input type="number" id="plantCode" name="plantCode" value="">
           </div>
         </div>
-        <div>
-          <div class="input-group">
-            <label for="speciesName"><b>Tree Species Name</b></label>
-            <select id="speciesName" name="speciesName" class="largeInput">
+        <div style="">
+          <div>
+            <div class="input-group">
+              <label for="speciesName"><b>Tree Species Name</b></label>
+              <!-- <select id="speciesName" name="speciesName" class="largeInput" style="display:none"> -->
+              <input type="" id="speciesName" name="speciesName" class="largeInput">
+              </select>
+            </div>
 
-            </select>
+            <div class="input-group">
+              <label for="inatMetaId">iNaturalist #</label>
+              <input id="plantInatMetaId" type="number" name="platInatMetaId" placeholder="123456789" value="">
+            </div>
+
+            <div class="input-group">
+              <label for="treeRemark">Remark</label>
+              <input id="treeRemark" name="treeRemark" class="largeInput" type="text">
+            </div>
+
           </div>
 
-          <div class="input-group">
-            <label for="inatMetaId">iNaturalist #</label>
-            <input id="plantInatMetaId" type="number" name="platInatMetaId" placeholder="123456789" value="">
-          </div>
+          <div>
+            <div class="input-group">
+              <label for="gbh">GBH</label>
+              <input class="smallInput" type="number" id="gbh" name="gbh" min="10" max="50" value="">
+            </div>
 
-          <div class="input-group">
-            <label for="treeRemark">Remark</label>
-            <input id="treeRemark" name="treeRemark" class="largeInput" type="text">
+            <div class="input-group">
+              <label for="treeLeaves">Leaves</label>
+              <select id="treeLeaves" name="treeLeaves">
+                <option value="Absent">Absent</option>
+                <option value="Few">Few (< 50%)</option>
+                <option value="Many">Many (> 50%)</option>
+                <option value="" selected>Unsure</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="treeCanopy">Canopy</label>
+              <select id="treeCanopy" name="treeCanopy">
+                <option value="Open">Open</option>
+                <option value="Partially Open">Partially Open (< 50%)</option>
+                <option value="Close">Close (> 50%)</option>
+                <option value="" selected>Unsure</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="treeFlowering">Flowering</label>
+              <div style="width:auto"><input id="treeFlowering" name="treeFlowering" type="checkbox"></div>
+            </div>
+            <div class="input-group">
+              <label for="treeFruiting">Fruiting</label>
+              <div style="width:auto"><input id="treeFruiting" name="treeFruiting" type="checkbox"></div>
+            </div>
           </div>
-
-        </div>
-        <div>
-          <div class="input-group">
-            <label for="gbh">GBH</label>
-            <input class="smallInput" type="number" id="gbh" name="gbh" min="10" max="50" value="">
-          </div>
-
-          <div class="input-group">
-            <label for="treeLeaves">Leaves</label>
-            <select id="treeLeaves" name="treeLeaves">
-              <option value="Absent">Absent</option>
-              <option value="Few">Few (< 50%)</option>
-              <option value="Many">Many (> 50%)</option>
-              <option value="" selected>Unsure</option>
-            </select>
-          </div>
-          <div class="input-group">
-            <label for="treeCanopy">Canopy</label>
-            <select id="treeCanopy" name="treeCanopy">
-              <option value="Open">Open</option>
-              <option value="Partially Open">Partially Open (< 50%)</option>
-              <option value="Close">Close (> 50%)</option>
-              <option value="" selected>Unsure</option>
-            </select>
-          </div>
-          <div class="input-group">
-            <label for="treeFlowering">Flowering</label>
-            <div style="width:auto"><input id="treeFlowering" name="treeFlowering" type="checkbox"></div>
-          </div>
-          <div class="input-group">
-            <label for="treeFruiting">Fruiting</label>
-            <div style="width:auto"><input id="treeFruiting" name="treeFruiting" type="checkbox"></div>
-          </div>
-
-
-
         </div>
       </div>
 
@@ -220,7 +226,9 @@
       </div>
 
     </div>
-    <div class="">
+    <div style="
+    /* text-align: center; */
+     ">
       <button class="btn1" type="button" onclick="addInputGroup()">Add Animal</button>
       <button class="btn1" id="removeBtn" type="button" style="opacity: 0.3;" onclick="removeInputGroup()">Remove
         Animal</button>
@@ -228,6 +236,7 @@
 
     <div id="action">
       <button type="button" onclick="submitForm()">Submit</button>
+      <!-- <button class="btn1" type="button" onclick="next()">Next</button> -->
       <a style="float:right; color:green; margin: 20px"
         href="https://docs.google.com/spreadsheets/d/1dQo9GGlV8opg-7pLxV3Y9c_GFzEAYu-Xxfd6TYb9l9o/" target="_blank">See
         submissions</a>
@@ -281,6 +290,15 @@
         element.style.display = "none"
         document.querySelector('#removeBtn').style.opacity = 0.3
 
+        ////////
+        let group = inputGroup2List[0];
+        group.querySelector('[name="animalSpecies"]').value = "";
+        group.querySelector('[name="animalCount"]').value = "";
+        group.querySelector('[name="interactionType"]').value = "";
+        group.querySelector('[name=animalInatMetaId]').value = "";
+        group.querySelector('[name=animalRemark]').value = "";
+
+
 
         //element.parentNode.removeChild(element);
       }
@@ -292,7 +310,7 @@
         var url1 = 'https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url';
         var url2 = 'https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url';
         var url3 = 'https://docs.google.com/forms/d/e/1FAIpQLSduzoPUnh1-VlaGDAXs4Q4oMSxQT06Es3vq-ik6XqhYXzzRZQ/formResponse?&submit=Submit?usp=pp_url';
-        ////
+
         console.log('data1')
         var formData1 = {
           'teamCode': document.getElementById('teamCode').value,
@@ -370,7 +388,7 @@
           // var url3Suffix = '&entry.1664808834=teamcode&entry.1981805346=treecode&entry.798862294=treespeciesname&entry.724347484=treeinatid&entry.1957343692=treeremarks&entry.1423009416=treegbh&entry.218206116=treeleaves&entry.1767881883=treecanopy&entry.1792652260=treeflowering&entry.1156221592=treefruiting&entry.1342359126=animalname&entry.1739765474=animalinatid&entry.1976377500=animalremarks&entry.1717792239=animalcount&entry.1852332458=animalactivity '
           var url3Suffix = `&entry.1664808834=${data.teamCode}&entry.1981805346=${data.plantCode}&entry.798862294=${data.speciesName}&entry.724347484=${data.plantInatMetaId}&entry.1957343692=${data.treeRemark}&entry.1423009416=${data.gbh}&entry.218206116=${data.treeLeaves}&entry.1767881883=${data.treeCanopy}&entry.1792652260=${data.treeFlowering}&entry.1156221592=${data.treeFruiting}&entry.1342359126=${data.animalSpecies || ""}&entry.1739765474=${data.animalInatMetaId || ""}&entry.1976377500=${data.animalRemark || ""}&entry.1717792239=${data.animalCount || ""}&entry.1852332458=${data.interactionType || ""} `;
 
-          return `${url}${url3Suffix}`;////////
+          return `${url}${url3Suffix}`;
         }
 
         // // Assuming you are using the Fetch API for simplicity
@@ -416,10 +434,30 @@
           });
         }
         alert("Data submitted.")
+        next();
       }
       catch (err) {
         alert(err.message)
       }
+    }
+
+    next = function () {
+      while (!hasNoAnimal()) {
+        removeInputGroup()
+      }
+      document.getElementById('plantCode').value = Number(document.getElementById('plantCode').value) + 1
+
+      document.getElementById('speciesName').value = "";
+      document.getElementById('plantInatMetaId').value = "";
+      document.getElementById('treeRemark').value = "";
+      document.getElementById('gbh').value = "";
+      document.getElementById('treeLeaves').value = "";
+      document.getElementById('treeCanopy').value = "";
+      document.getElementById('treeFlowering').checked = false;
+      document.getElementById('treeFruiting').checked = false;
+      ////
+
+
     }
   </script>
 
@@ -486,7 +524,7 @@
     }
 
     // Load tree data when the page is loaded
-    window.onload = loadTreeData;
+    // window.onload = loadTreeData;
   </script>
 </body>
 
