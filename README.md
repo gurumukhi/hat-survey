@@ -1,1 +1,1 @@
-https://htmlpreview.github.io/?https://raw.githubusercontent.com/gurumukhi/hat-survey/main/index.html
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/gurumukhi/hat-survey/main/survey.html
