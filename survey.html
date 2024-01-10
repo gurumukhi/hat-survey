@@ -8,6 +8,36 @@
 
   <title>Hyderabad Annual Tree Survey</title>
   <style>
+    .infolink::before {
+      content: '?';
+      font-size: 60%;
+      font-family: sans-serif;
+      vertical-align: middle;
+      font-weight: bold;
+      text-align: center;
+      display: inline-block;
+      width: 1.8ex;
+      height: 1.8ex;
+      border-radius: 1ex;
+      color: green;
+      background: white;
+      border: thin solid green;
+    }
+
+    .infolink:hover::before {
+      color: white;
+      background: green;
+      border-color: white;
+    }
+
+    .help-icon {
+      display: inline-block;
+      margin-left: 3px;
+      margin-top: -2px;
+      vertical-align: top;
+      cursor: pointer;
+    }
+
     li {
       margin: 5px
     }
@@ -133,7 +163,15 @@
         <div style="">
           <div>
             <div class="input-group">
-              <label for="speciesName"><b>Tree Species Name</b></label>
+              <label for="speciesName"><b>Tree Species Name</b>
+
+                <!-- <a class="infolink" href="#">a link</a> -->
+
+                <span class="help-icon">
+                  <a target="_blank" class="infolink"
+                    href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtU7yER88_Ltp_a1pEDedDzYWY6PguA_pNSqUNC9m-XH69sp60ElroW8Xf4mKMY5MGMbDqOoc79taU/pubhtml?gid=2080266743&single=true"
+                    title="Help"></a>
+                </span></label>
               <select id="speciesName" name="speciesName" class="largeInput" style="">
                 <!-- <input type="" id="speciesName" name="speciesName" class="largeInput"> -->
               </select>
@@ -531,6 +569,9 @@ Unidentified / Other`
         const option = document.createElement('option');
         option.value = name;
         option.text = name;
+        if (name === 'Unidentified / Other') {
+          option.selected = true;
+        }
         dropdown.appendChild(option);
       });
       // })
