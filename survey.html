@@ -134,8 +134,8 @@
           <div>
             <div class="input-group">
               <label for="speciesName"><b>Tree Species Name</b></label>
-              <!-- <select id="speciesName" name="speciesName" class="largeInput" style="display:none"> -->
-              <input type="" id="speciesName" name="speciesName" class="largeInput">
+              <select id="speciesName" name="speciesName" class="largeInput" style="">
+                <!-- <input type="" id="speciesName" name="speciesName" class="largeInput"> -->
               </select>
             </div>
 
@@ -470,18 +470,34 @@
       //   .then(response => response.text())
       //   .then(csvData => {
       // Parse CSV to JSON using Papaparse
-      csvData = `Sr No;ScientificName;Common name;Hindi name;Telugu name;Additional information
-0;Unidentified;Unidentified;Unidentified;Unidentified;Unidentified
-1;Acacia nilotica;Babul;Babul;Nalla Tumma;Sensitive to touch
-2;Ficus benghalensis;Banyan;Bargad;Marri;Large
-3;Mangifera indica;Mango;Aam;Mamidi;Produces delicious
-4;Azadirachta indica;Neem;Neem;Vepa;Medicinal tree with bitter leaves and useful in various remedies.
-5;Delonix regia;Royal Poinciana;Gulmohar;Gulmamdaramu;Known for its vibrant red-orange flowers.
-6;Terminalia arjuna;Arjun Tree;Arjun;Terupalli;Used in traditional medicine
-7;Eucalyptus globulus;Blue Gum;Blue Gum;Nilagirigitta;Commonly used for timber and paper production.
-8;Peltophorum pterocarpum;Copperpod;Pila Kaner;Regu Regutu;Attractive yellow flowers
-9;Bauhinia variegata;Purple Orchid Tree;Kachnar;Manjuvu;Named for its distinctive butterfly-shaped leaves.
-10;Cocos nucifera;Coconut Palm;Nariyal;Kobbari Chettu;Provides a variety of products`;
+      csvData = `ScientificName
+Unidentified
+Acacia nilotica
+Alangium salvifolium
+Albizia lebbeck
+Azadirachta indica
+Bauhinia variegata
+Borassus flabellifer
+Buchanania lanzan
+Butea monosperma
+Cocos nucifera
+Cordia dichotoma
+Delonix regia
+Dilbargia sisoo
+Eucalyptus globulus
+Ficus benghalensis
+Ficus religiosa
+Haldina cordifolia
+Holarrhena pubescens
+Mangifera indica
+Mimusops elengi
+Peltophorum pterocarpum
+Prosopis cineraria
+Terminalia arjuna
+Ziziphus mauritiana`
+        ;
+
+
       // const jsonData = Papa.parse(csvData, { header: true }).data;
       function parseCSV(csvData) {
         const lines = csvData.split('\n');
@@ -524,7 +540,7 @@
     }
 
     // Load tree data when the page is loaded
-    // window.onload = loadTreeData;
+    window.onload = loadTreeData;
   </script>
 </body>
 
