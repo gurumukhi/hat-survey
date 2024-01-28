@@ -41,6 +41,7 @@ function removeInputGroup () {
 }
 
 function submitForm () {
+  alert('Submissions are disabled for now')
   try {
     console.log('hi')
     var url1 =
@@ -96,6 +97,7 @@ function submitForm () {
     submitData(url3, formData1)
   } catch (e) {
     console.error(e)
+    alert(e)
   }
 }
 
