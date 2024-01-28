@@ -81,6 +81,9 @@ form {
 .inline {
     display: inline;
 }
+#volunteerName{
+    width: 130px;
+}
 #inputGroup1,
 #inputGroup2 {
     margin-bottom: 20px;
