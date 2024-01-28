@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+  <title>Hyderabad Annual Tree Survey</title>
+  <style>
+    .infolink::before {
+      content: '?';
+      font-size: 60%;
+      font-family: sans-serif;
+      vertical-align: middle;
+      font-weight: bold;
+      text-align: center;
+      display: inline-block;
+      width: 1.8ex;
+      height: 1.8ex;
+      border-radius: 1ex;
+      color: green;
+      background: white;
+      border: thin solid green;
+    }
+
+    .infolink:hover::before {
+      color: white;
+      background: green;
+      border-color: white;
+    }
+
+    .help-icon {
+      display: inline-block;
+      margin-left: 3px;
+      margin-top: -2px;
+      vertical-align: top;
+      cursor: pointer;
+    }
+
+    li {
+      margin: 5px
+    }
+
+    .smallInput {
+      width: 60px !important;
+    }
+
+    .largeInput {
+      width: 200px !important;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* height: 100vh; */
+    }
+
+    form {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-group {
+      /* margin-bottom: 15px; */
+      margin: 5px 5px 10px 5px;
+      display: inline-grid;
+    }
+
+    #inputGroup1,
+    #inputGroup2 {
+      margin-bottom: 20px;
+    }
+
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      /* font-weight: bold; */
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin: 10px 10px 0px 5px;
+    }
+
+    input[type="number"],
+    input,
+    select {
+      width: 100px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .btn1 {
+      color: green;
+      background: none;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* button:hover {
+       background-color: #45a049;
+      color: white 
+    } */
+
+    /* Additional styles for radio buttons */
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    /* Responsive styles */
+    /* @media only screen and (max-width: 600px) {
+      form {
+        width: 100%;
+      }
+    } */
+
+
+    /* .input-group {
+      margin-bottom: 10px;
+    } */
+  </style>
+</head>
+
+<body style="background: rgba(11, 156, 49,0.7) ">
+
+  <form id="dataForm">
+    <h1 style="text-align: center;">Hyderabad Annual Tree Survey</h1>
+    <br />
+    <div id="inputsGroups">
+      <div id="inputGroup1">
+        <div style="
+        /* text-align: center;  */
+        margin-bottom: 20px;">
+          <div class="input-group">
+            <label for="teamCode">Team Code</label>
+            <input type="number" id="teamCode" name="teamCode" value="">
+          </div>
+          <div class="input-group">
+            <label for="plantCode">Tree Code</label>
+            <input type="number" id="plantCode" name="plantCode" value="">
+          </div>
+        </div>
+        <div style="">
+          <div>
+            <div class="input-group">
+              <label for="speciesName"><b>Tree Species Name</b>
+
+                <!-- <a class="infolink" href="#">a link</a> -->
+
+                <span class="help-icon">
+                  <a target="_blank" class="infolink"
+                    href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtU7yER88_Ltp_a1pEDedDzYWY6PguA_pNSqUNC9m-XH69sp60ElroW8Xf4mKMY5MGMbDqOoc79taU/pubhtml?gid=2080266743&single=true"
+                    title="Help"></a>
+                </span></label>
+              <select id="speciesName" name="speciesName" class="largeInput" style="">
+                <!-- <input type="" id="speciesName" name="speciesName" class="largeInput"> -->
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="inatMetaId">iNaturalist #</label>
+              <input id="plantInatMetaId" type="number" name="platInatMetaId" placeholder="123456789" value="">
+            </div>
+
+            <div class="input-group">
+              <label for="treeRemark">Remark</label>
+              <input id="treeRemark" name="treeRemark" class="largeInput" type="text">
+            </div>
+
+          </div>
+
+          <div>
+            <div class="input-group">
+              <label for="gbh">GBH</label>
+              <input class="smallInput" type="number" id="gbh" name="gbh" min="10" max="50" value="">
+            </div>
+
+            <div class="input-group">
+              <label for="treeLeaves">Leaves</label>
+              <select id="treeLeaves" name="treeLeaves">
+                <option value="Absent">Absent</option>
+                <option value="Few">Few (< 50%)</option>
+                <option value="Many">Many (> 50%)</option>
+                <option value="" selected>Unsure</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="treeCanopy">Canopy</label>
+              <select id="treeCanopy" name="treeCanopy">
+                <option value="Open">Open</option>
+                <option value="Partially Open">Partially Open (< 50%)</option>
+                <option value="Close">Close (> 50%)</option>
+                <option value="" selected>Unsure</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="treeFlowering">Flowering</label>
+              <div style="width:auto"><input id="treeFlowering" name="treeFlowering" type="checkbox"></div>
+            </div>
+            <div class="input-group">
+              <label for="treeFruiting">Fruiting</label>
+              <div style="width:auto"><input id="treeFruiting" name="treeFruiting" type="checkbox"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="inputGroup2" style="display: none;">
+        <div>
+          <div class="input-group">
+            <label for="animalSpecies"><b>Animal Name</b></label>
+            <input id="animalSpecies" class="largeInput" name="animalSpecies" type="text">
+
+          </div>
+
+
+          <div class="input-group">
+            <label for="inatMetaId">iNaturalist #</label>
+            <input id="animalInatMetaId" type="number" name="animalInatMetaId" placeholder="123456789" value="">
+          </div>
+
+          <div class="input-group">
+            <label for="animalRemark">Remark</label>
+            <input id="animalRemark" class="largeInput" name="animalRemark" type="text">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="animalCount">Count</label>
+          <input type="number" class="smallInput" id="animalCount" name="animalCount" value="">
+        </div>
+
+        <div class="input-group">
+          <label>Activity</label>
+          <select id="interactionType" name="interactionType">
+            <option value="None">None</option>
+            <option value="Feeding">Flying/Moving</option>
+            <option value="Nesting">Resting</option>
+            <option value="Nesting">Mating</option>
+            <option value="Nesting">Aggresion</option>
+          </select>
+          <!-- <label><input type="radio" name="interactionType" value="Feeding" checked>Feeding</label>
+        <label><input type="radio" name="interactionType" value="Nesting">Nesting</label> -->
+        </div>
+      </div>
+
+    </div>
+    <div style="
+    /* text-align: center; */
+     ">
+      <button class="btn1" type="button" onclick="addInputGroup()">Add Animal</button>
+      <button class="btn1" id="removeBtn" type="button" style="opacity: 0.3;" onclick="removeInputGroup()">Remove
+        Animal</button>
+    </div>
+
+    <div id="action">
+      <button type="button" onclick="submitForm()">Submit</button>
+      <!-- <button class="btn1" type="button" onclick="next()">Next</button> -->
+      <a style="float:right; color:green; margin: 20px"
+        href="https://docs.google.com/spreadsheets/d/1dQo9GGlV8opg-7pLxV3Y9c_GFzEAYu-Xxfd6TYb9l9o/" target="_blank">See
+        submissions</a>
+    </div>
+    <br />
+    <br />
+    <div>
+      <h2> Help Resources</h2>
+      <ul>
+        <li><a
+            href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtU7yER88_Ltp_a1pEDedDzYWY6PguA_pNSqUNC9m-XH69sp60ElroW8Xf4mKMY5MGMbDqOoc79taU/pubhtml?gid=807224095&single=true">Tree
+            Species Names</a></li>
+        <li><a href="https://www.seasonwatch.in/wp-content/uploads/2023/11/SW-phenophases-guide-compressed.pdf">Tree
+            Phenophases Detailed Guide PDF
+          </a></li>
+
+      </ul>
+    </div>
+
+  </form>
+
+  <script>
+    function hasNoAnimal() {
+      var inputGroup2List = document.querySelectorAll('#inputGroup2');
+      return inputGroup2List.length == 1 && inputGroup2List[0].style.display == "none"
+
+    }
+    function addInputGroup() {
+      console.log('adding')
+      if (hasNoAnimal()) {
+        var inputGroup2List = document.querySelectorAll('#inputGroup2');
+        // inputGroup2List[0].style.opacity = 1
+        inputGroup2List[0].style.display = "block"
+        console.log(inputGroup2List[0])
+        document.querySelector('#removeBtn').style.opacity = 1
+      } else {
+        var clone = document.getElementById('inputGroup2').cloneNode(true);
+        document.getElementById('inputsGroups').appendChild(clone);
+      }
+    }
+
+    function removeInputGroup() {
+      console.log('removing')
+      var inputGroup2List = document.querySelectorAll('#inputGroup2');
+      if (inputGroup2List.length > 1) {
+        var element = inputGroup2List[inputGroup2List.length - 1];
+        element.parentNode.removeChild(element);
+      } else if (inputGroup2List.length == 1) {
+        var element = inputGroup2List[inputGroup2List.length - 1];
+        // element.style.opacity = 0.3
+        element.style.display = "none"
+        document.querySelector('#removeBtn').style.opacity = 0.3
+
+        ////////
+        let group = inputGroup2List[0];
+        group.querySelector('[name="animalSpecies"]').value = "";
+        group.querySelector('[name="animalCount"]').value = "";
+        group.querySelector('[name="interactionType"]').value = "";
+        group.querySelector('[name=animalInatMetaId]').value = "";
+        group.querySelector('[name=animalRemark]').value = "";
+
+
+
+        //element.parentNode.removeChild(element);
+      }
+    }
+
+    function submitForm() {
+      try {
+        console.log('hi')
+        var url1 = 'https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url';
+        var url2 = 'https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url';
+        var url3 = 'https://docs.google.com/forms/d/e/1FAIpQLSduzoPUnh1-VlaGDAXs4Q4oMSxQT06Es3vq-ik6XqhYXzzRZQ/formResponse?&submit=Submit?usp=pp_url';
+
+        console.log('data1')
+        var formData1 = {
+          'teamCode': document.getElementById('teamCode').value,
+          'plantCode': document.getElementById('plantCode').value,
+          'speciesName': document.getElementById('speciesName').value,
+          'plantInatMetaId': document.getElementById('plantInatMetaId').value,
+          'treeRemark': document.getElementById('treeRemark').value,
+          'gbh': document.getElementById('gbh').value,
+          'treeLeaves': document.getElementById('treeLeaves').value,
+          'treeCanopy': document.getElementById('treeCanopy').value,
+          'treeFlowering': document.getElementById('treeFlowering').checked,
+          'treeFruiting': document.getElementById('treeFruiting').checked,
+        };
+
+        var inputGroup2Elements = document.querySelectorAll('#inputGroup2');
+        var formData2Array = [];
+
+        inputGroup2Elements.forEach(function (group) {
+          formData2Array.push({
+            // 'associatedPlantCode': formData1.plantCode,
+            'animalSpecies': group.querySelector('[name="animalSpecies"]').value,
+            'animalCount': group.querySelector('[name="animalCount"]').value,
+            'interactionType': group.querySelector('[name="interactionType"]').value,
+            'animalInatMetaId': group.querySelector('[name=animalInatMetaId]').value,
+            'animalRemark': group.querySelector('[name=animalRemark]').value,
+          });
+        });
+
+        getFullURL1 = (url, data) => {
+          {
+            // "teamCode": "111",
+            // "plantCode": "1116",
+            // "speciesName": "Neem",
+            // "gbh": "3"
+          }
+          return `${url}&entry.1731982848=${data.teamCode}&entry.1336780329=${data.plantCode}&entry.1634616229=${data.speciesName}&entry.965392427=${data.gbh}`;
+          // var url1 = 'https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url';
+
+          // https://docs.google.com/forms/d/e/1FAIpQLSep1hYt4lOvIJSpwcsXEWT3VIqN3LRFioN0mml1awGwlIADPA/formResponse?&submit=Submit?usp=pp_url&entry.1731982848=1111&entry.1336780329=1115&entry.1634616229=Neem&entry.965392427=2
+        }
+
+        getFullURL2 = (url, data) => {
+          //         {
+          //   "associatedPlantCode": "1116",
+          //   "animalSpecies": "Roller",
+          //   "animalCount": "4",
+          //   "interactionType": "Feeding"
+          // }
+          return `${url}&entry.649217680=${data.associatedPlantCode}&entry.267793795=${data.animalSpecies}&entry.342920962=${data.animalCount}&entry.1901368330=${data.interactionType || "Feeding"}`
+          // var url2 = 'https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url';
+
+          // https://docs.google.com/forms/d/e/1FAIpQLSc_dlM2JJw19OU20IzTaQmUoq5TNB9Tz0EdAptPDk7Th2hybQ/formResponse?&submit=Submit?usp=pp_url&entry.649217680=1115&entry.267793795=Dragonfly&entry.342920962=2&entry.1901368330=Feeding
+        }
+
+        getFullURL3 = (url, data) => {
+          // return `${url}&entry.1731982848=${data.teamCode}&entry.1336780329=${data.plantCode}&entry.1634616229=${data.speciesName}&entry.965392427=${data.gbh}`;
+          // return `${url}&entry.649217680=${data.associatedPlantCode}&entry.267793795=${data.animalSpecies}&entry.342920962=${data.animalCount}&entry.1901368330=${data.interactionType || "Feeding"}`
+
+          // teamCode
+          // plantCode
+          // speciesName
+          // plantInatMetaId
+          // treeRemark
+          // gbh
+          // treeLeaves
+          // treeCanopy
+          // treeFlowering
+          // treeFruiting
+          // animalSpecies
+          // animalCount
+          // interactionType
+          // animalInatMetaId
+          // animalRemark
+
+          // var url3Suffix = '&entry.1664808834=teamcode&entry.1981805346=treecode&entry.798862294=treespeciesname&entry.724347484=treeinatid&entry.1957343692=treeremarks&entry.1423009416=treegbh&entry.218206116=treeleaves&entry.1767881883=treecanopy&entry.1792652260=treeflowering&entry.1156221592=treefruiting&entry.1342359126=animalname&entry.1739765474=animalinatid&entry.1976377500=animalremarks&entry.1717792239=animalcount&entry.1852332458=animalactivity '
+          var url3Suffix = `&entry.1664808834=${data.teamCode}&entry.1981805346=${data.plantCode}&entry.798862294=${data.speciesName}&entry.724347484=${data.plantInatMetaId}&entry.1957343692=${data.treeRemark}&entry.1423009416=${data.gbh}&entry.218206116=${data.treeLeaves}&entry.1767881883=${data.treeCanopy}&entry.1792652260=${data.treeFlowering}&entry.1156221592=${data.treeFruiting}&entry.1342359126=${data.animalSpecies || ""}&entry.1739765474=${data.animalInatMetaId || ""}&entry.1976377500=${data.animalRemark || ""}&entry.1717792239=${data.animalCount || ""}&entry.1852332458=${data.interactionType || ""} `;
+
+          return `${url}${url3Suffix}`;
+        }
+
+        // // Assuming you are using the Fetch API for simplicity
+        // fetch(getFullURL1(url1, formData1), {
+        //   method: 'POST',
+        //   body: new URLSearchParams(formData1),
+        //   headers: {
+        //     'Content-Type': 'application/x-www-form-urlencoded'
+        //   }
+        // });
+
+        // if (!hasNoAnimal()) {
+        //   formData2Array.forEach(function (data) {
+        //     fetch(getFullURL2(url2, data), {
+        //       method: 'POST',
+        //       body: new URLSearchParams(data),
+        //       headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded'
+        //       }
+        //     });
+        //   });
+        // }
+
+        // Assuming you are using the Fetch API for simplicity
+        if (hasNoAnimal()) {
+          fetch(getFullURL3(url3, formData1), {
+            method: 'POST',
+            // body: new URLSearchParams(formData1),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          });
+        }
+        else {
+          formData2Array.forEach(function (data) {
+            fetch(getFullURL3(url3, { ...formData1, ...data }), {
+              method: 'POST',
+              // body: new URLSearchParams(data),
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            });
+          });
+        }
+        alert("Data submitted.")
+        next();
+      }
+      catch (err) {
+        alert(err.message)
+      }
+    }
+
+    next = function () {
+      while (!hasNoAnimal()) {
+        removeInputGroup()
+      }
+      document.getElementById('plantCode').value = Number(document.getElementById('plantCode').value) + 1
+
+      document.getElementById('speciesName').value = "";
+      document.getElementById('plantInatMetaId').value = "";
+      document.getElementById('treeRemark').value = "";
+      document.getElementById('gbh').value = "";
+      document.getElementById('treeLeaves').value = "";
+      document.getElementById('treeCanopy').value = "";
+      document.getElementById('treeFlowering').checked = false;
+      document.getElementById('treeFruiting').checked = false;
+      ////
+
+
+    }
+  </script>
+
+
+  <script>
+    const csvFileName = 'trees.csv';
+
+    function loadTreeData() {
+      // fetch(csvFileName)
+      //   .then(response => response.text())
+      //   .then(csvData => {
+      // Parse CSV to JSON using Papaparse
+      csvData = `ScientificName
+Abies pindrow
+Abies spectabilis
+Acacia leucophloea
+Acacia nilotica
+Acer oblongum
+Acer sterculiaceum
+Aegle marmelos
+Aesculus indica
+Ailanthus excelsa
+Albizia amara
+Albizia lebbeck
+Albizia odoratissima
+Albizia procera
+Alangium salvifolium
+Alstonia scholais
+Annona squamosa
+Anogeissus latifolia
+Anogeissus pendula
+Artocarpus heterophyllus
+Avicennia marina
+Azadirachta indica
+Barringtonia racemosa
+Bauhinia purpurea
+Bauhinia racemosa
+Bauhinia retusa
+Bombax ceiba
+Borassus flabellifer
+Boswellia serrata
+Buchanania cochinchinensis
+Buchanania lanzan
+Butea monosperma
+Canarium strictum
+Caryota urens
+Cascabela thevetia
+Cassia fistula
+Cedrus deodara
+Ceiba pentandra
+Ceiba speciosa
+Cerbera odollum
+Champereia manillana
+Chloroxylon swietenia
+Citrus maxima
+Cochlospermum religiosum
+Cocos nucifera
+Coffea arabica
+Coffea robusta
+Cordia dichotoma
+Cordia wallichii
+Coriaria nepalensis
+Couroupita guianensis
+Crataeva religiosa
+Crateva adansonii
+Cupressus torulosa
+Dalbergia lanceolaria
+Dalbergia sissoo
+Delonix regia
+Dichrostachys cinerea
+Dillenia indica
+Dillenia pentagyna
+Dipterocarpus retusus
+Duabanga grandiflora
+Erythrina variegata
+Falconeria insignis
+Ficus benghalensis
+Ficus mollis
+Ficus palmata
+Ficus racemosa
+Ficus religiosa
+Garuga pinnata
+Gliricidia sepium
+Gmelina arborea
+Goniothalamus macranthus
+Grewia optiva
+Holoptelea integrifolia
+Jacaranda mimosifolia
+Juglans regia
+Kigelia africana
+Kydia calycina
+Lagerstroemia hypoleuca
+Lagerstroemia speciosa
+Lannea coromandelica
+Lantana camara
+Lawsonia inermis
+Lepisanthes rubiginosa
+Litchi chinensis
+Macaranga peltata
+Madhuca longifolia
+Magnolia campbellii
+Mallotus nudiflorus
+Malus domestica
+Mangifera indica
+Manilkara zapota
+Melaleuca viminalis
+Melia azedarach
+Mesua ferrea
+Michelia champaca
+Millingtonia hortensis
+Mimusops elengi
+Mitragyna parvifolia
+Monoon longifolium
+Morinda citrifolia
+Morinda pubescens
+Moringa oleifera
+Morus alba
+Muntingia calabura
+Murraya koenigii
+Myrica esculenta
+Neolamarckia cadamba
+Nerium oleander
+Nyctanthes arbor-tristis
+Oroxylum indicum
+Parkia biglandulosa
+Peltophorum pterocarpum
+Phoenix sylvestris
+Phyllanthus emblica
+Picea smithiana
+Pinus roxburghii
+Pinus wallichiana
+Pithecellobium dulce
+Platanus orientalis
+Plumeria rubra
+Pongamia pinnata
+Populus ciliata
+Prosopis cineraria
+Prosopis juliflora
+Prunus armeniaca
+Prunus cerasoides
+Prunus domestica
+Prunus nepalensis
+Prunus persica
+Psidium guajava
+Pterocarpus marsupium
+Pterospermum acerifolium
+Punica granatum
+Pyrus pashia
+Pyrus pyrifolia
+Quercus floribunda
+Quercus leucotrichophora
+Quercus semecarpifolia
+Rhododendron arboreum
+Rhododendron nilagiricum
+Rosa webbiana
+Salix alba
+Samanea saman
+Santalum album
+Saraca asoca
+Semecarpus anacardium
+Shorea robusta
+Spathodea campanulata
+Sterculia foetida
+Sterculia urens
+Syzygium cumini
+Tabebuia aurea
+Tabebuia rosea
+Tabernaemontana crispa
+Tabernaemontana divaricata
+Tamarindus indica
+Taxus baccata
+Tecomella undulata
+Tectona grandis
+Terminalia arjuna
+Terminalia bellirica
+Terminalia catappa
+Terminalia chebula
+Terminalia paniculata
+Terminalia tomentosa
+Thespesia populnea
+Toona ciliata
+Trema orientale
+Vitex negundo
+Wrightia tinctoria
+Zanthoxylum rhetsa
+Ziziphus jujuba
+Ziziphus mauritiana
+Unidentified / Other`
+        ;
+
+
+      // const jsonData = Papa.parse(csvData, { header: true }).data;
+      function parseCSV(csvData) {
+        const lines = csvData.split('\n');
+        const headers = lines[0].split(';');
+        const jsonDataList = [];
+        console.log('parsing')
+        for (let i = 1; i < lines.length; i++) {
+          const currentLine = lines[i].split(';');
+          const row = {};
+
+          for (let j = 0; j < headers.length; j++) {
+            row[headers[j]] = currentLine[j];
+          }
+
+          jsonDataList.push(row);
+        }
+        console.log(jsonDataList)
+        return jsonDataList;
+      }
+
+
+      const jsonData = parseCSV(csvData, { header: true });
+      console.log(jsonData)
+
+      const treeNames = jsonData.map(row => row['ScientificName']); // Replace 'TreeName' with the actual column header
+
+      const dropdown = document.getElementById('speciesName');
+
+      // Populate the dropdown
+      treeNames.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.text = name;
+        if (name === 'Unidentified / Other') {
+          option.selected = true;
+        }
+        dropdown.appendChild(option);
+      });
+      // })
+      // .catch(error => {
+      //   console.error('Error fetching or parsing CSV data: ', error);
+      // });
+    }
+
+    // Load tree data when the page is loaded
+    window.onload = loadTreeData;
+  </script>
+</body>
+
+</html>
