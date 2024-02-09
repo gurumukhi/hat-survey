@@ -473,4 +473,4 @@ Unidentified / Other`
 }
 
 // Load tree data when the page is loaded
-window.onload = loadTreeData
+// window.onload = loadTreeData
