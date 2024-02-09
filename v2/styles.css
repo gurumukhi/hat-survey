@@ -1,130 +1,162 @@
 /* Add your custom styles here */
-
 body {
-    background: rgba(11, 156, 49, 0.7);
+  background: rgba(11, 156, 49, 0.7);
+  font-size: small;
+}
+
+input {
+  /* border: 1px solid lightgreen; */
+}
+.rb {
+  padding: 0px;
+  /* opacity: 0.3; */
+}
+
+h1 {
+  /* text-shadow: 1px 1px lightgreen; */
 }
 
 .yourName {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .infolink::before {
-    content: '?';
-    font-size: 60%;
-    font-family: sans-serif;
-    vertical-align: middle;
-    font-weight: bold;
-    text-align: center;
-    display: inline-block;
-    width: 1.8ex;
-    height: 1.8ex;
-    border-radius: 1ex;
-    color: green;
-    background: white;
-    border: thin solid green;
+  content: '?';
+  font-size: 60%;
+  font-family: sans-serif;
+  vertical-align: middle;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  width: 1.8ex;
+  height: 1.8ex;
+  border-radius: 1ex;
+  color: green;
+  background: white;
+  border: thin solid green;
 }
 
 .infolink:hover::before {
-    color: white;
-    background: green;
-    border-color: white;
+  color: white;
+  background: green;
+  border-color: white;
 }
 
 .help-icon {
-    display: inline-block;
-    margin-left: 3px;
-    margin-top: -2px;
-    vertical-align: top;
-    cursor: pointer;
+  display: inline-block;
+  margin-left: 3px;
+  margin-top: -2px;
+  vertical-align: top;
+  cursor: pointer;
 }
 
 li {
-    margin: 5px;
+  margin: 5px;
 }
 
 .smallInput {
-    width: 60px !important;
+  width: 60px !important;
 }
 
 .largeInput {
-    width: 200px !important;
+  width: 200px !important;
 }
 
+.team input {
+  text-align: center;
+}
 body {
-    font-family: Merriweather,sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-family: Merriweather, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 470px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .input-group {
-    margin: 5px 5px 10px 5px;
-    display: inline-grid;
+  margin: 5px 5px 10px 5px;
+  display: inline-grid;
 }
 
 .thin {
-    height: 25px;
+  height: 25px;
 }
 .team {
-    text-align: center;
-    margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 .inline {
-    display: inline;
+  display: inline;
 }
-#volunteerName{
-    width: 130px;
+#volunteerName {
+  width: 130px;
 }
 #inputGroup1,
 #inputGroup2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px dotted lightgreen;
 }
+
+/* #inputGroup2 {
+  display: none;
+} */
 
 label {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 
-input[type="checkbox"] {
-    width: auto;
-    margin: 10px 10px 0px 5px;
+input[type='checkbox'] {
+  width: auto;
+  margin: 10px 10px 0px 5px;
 }
 
-input[type="number"],
+input[type='number'],
 input,
 select {
-    width: 100px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+  width: 116px;
+  padding: 8px;
+  border: 1px solid silver;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
+/* #id {
+    font-size: smaller;
+} */
 .btn1 {
-    color: green;
-    background: none;
-    margin-bottom: 10px;
+  text-decoration: underline;
+  color: green;
+  background: none;
+  margin-bottom: 10px;
 }
 
 button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
+  /* border-radius: 25px; */
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-input[type="radio"] {
-    margin-right: 5px;
+input[type='radio'] {
+  margin-right: 5px;
+}
+
+#action a {
+  float: right;
+  color: green;
+  margin: 20px;
 }
